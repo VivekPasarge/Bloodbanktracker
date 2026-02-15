@@ -1,0 +1,354 @@
+/* ==========================================
+   GLOBAL THEME ENGINE – FINAL, LOCKED
+========================================== */
+
+:root {
+  /* Background */
+  --bg-main: linear-gradient(180deg, #0b0f13, #071018);
+
+  /* Text */
+  --text-main: #e6eef2;
+  --text-soft: rgba(230,238,242,0.72);
+
+  /* Surfaces */
+  --surface-bg: rgba(15,23,32,0.78);
+  --surface-border: rgba(255,255,255,0.14);
+
+  /* Accent */
+  --accent: #e3342f;
+  --accent-soft: rgba(227,52,47,0.35);
+
+  /* UI */
+  --muted: #94a3b8;
+  --glass: rgba(255,255,255,0.035);
+
+  --radius: 14px;
+
+  /* Circles */
+  --circle-track: rgba(255,255,255,0.20);
+
+  /* Shadows */
+  --shadow-soft: 0 10px 30px rgba(0,0,0,0.45);
+  --shadow-card: 0 12px 32px rgba(2,6,23,0.35);
+
+}
+
+/* ================= DARK FAMILY ================= */
+
+[data-theme="default"],
+[data-theme="night"],
+[data-theme="ai-blue"],
+[data-theme="purple"] {
+  --surface-bg: rgba(15,23,32,0.82);
+  --surface-border: rgba(255,255,255,0.18);
+}
+
+/* ================= GREEN ================= */
+
+[data-theme="green"] {
+  --bg-main: linear-gradient(135deg,#134e5e,#71b280);
+  --accent: #22c55e;
+  --accent-soft: rgba(34,197,94,0.35);
+}
+
+/* ================= NATURE ================= */
+
+[data-theme="nature"] {
+  --bg-main: linear-gradient(135deg,#11998e,#38ef7d);
+  --accent: #16a34a;
+  --accent-soft: rgba(22,163,74,0.35);
+}
+
+/* ================= SUNSET ================= */
+
+[data-theme="sunset"] {
+  --bg-main: linear-gradient(135deg,#ff512f,#dd2476);
+  --accent: #ff7849;
+  --accent-soft: rgba(255,120,73,0.35);
+}
+
+/* ================= EARTH ================= */
+
+[data-theme="earth"] {
+  --bg-main: linear-gradient(135deg,#3a1c71,#d76d77,#ffaf7b);
+  --accent: #e8796f;
+  --accent-soft: rgba(232,121,111,0.35);
+}
+
+/* ================= PURPLE ================= */
+
+[data-theme="purple"] {
+  --bg-main: linear-gradient(135deg,#41295a,#2f0743);
+  --accent: #8b5cf6;
+  --accent-soft: rgba(139,92,246,0.35);
+}
+
+/* ================= AI BLUE ================= */
+
+[data-theme="ai-blue"] {
+  --bg-main: linear-gradient(135deg,#141e30,#243b55);
+  --accent: #3b82f6;
+  --accent-soft: rgba(59,130,246,0.35);
+}
+
+/* ================= NIGHT ================= */
+
+[data-theme="night"] {
+  --bg-main: linear-gradient(135deg,#000428,#004e92);
+  --accent: #60a5fa;
+  --accent-soft: rgba(96,165,250,0.35);
+}
+
+/* ================= NEON ================= */
+
+[data-theme="neon"] {
+  --bg-main: linear-gradient(135deg,#00f260,#0575e6);
+  --accent: #39ff14;
+  --accent-soft: rgba(57,255,20,0.28);
+}
+
+/* ================= GOLD ================= */
+
+[data-theme="gold"] {
+  --bg-main: linear-gradient(135deg,#bfa13a,#f5d76e);
+
+  --text-main: #1f2937;
+  --text-soft: #374151;
+
+  --surface-bg: rgba(255,255,255,0.92);
+  --surface-border: rgba(0,0,0,0.14);
+
+  --accent: #b8860b;
+  --accent-soft: rgba(184,134,11,0.35);
+
+  --circle-track: rgba(0,0,0,0.22);
+}
+
+/* ================= LIGHT ================= */
+
+[data-theme="light"] {
+  --bg-main: linear-gradient(135deg,#f5f7fa,#c3cfe2);
+
+  --text-main: #111827;
+  --text-soft: #4b5563;
+
+  --surface-bg: rgba(255,255,255,0.97);
+  --surface-border: #e5e7eb;
+
+  --accent: #2563eb;
+  --accent-soft: rgba(37,99,235,0.35);
+
+  --circle-track: #e5e7eb;
+}
+/* ================= LIGHT FAMILY CARD FIX ================= */
+
+[data-theme="light"] .panel,
+[data-theme="light"] .card-small,
+[data-theme="gold"] .panel,
+[data-theme="gold"] .card-small {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.88),
+      rgba(255,255,255,0.72)
+    ),
+    var(--surface-bg);
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+/* ================= TEXT CONTRAST FIX ================= */
+
+[data-theme="light"] .panel,
+[data-theme="light"] .card-small,
+[data-theme="gold"] .panel,
+[data-theme="gold"] .card-small,
+[data-theme="neon"] .panel,
+[data-theme="neon"] .card-small,
+[data-theme="nature"] .panel,
+[data-theme="nature"] .card-small {
+  color: var(--text-main);
+}
+
+[data-theme="light"] .footer-muted,
+[data-theme="gold"] .footer-muted,
+[data-theme="neon"] .footer-muted,
+[data-theme="nature"] .footer-muted {
+  color: var(--text-soft);
+}
+
+.hero-title {
+  text-transform: none;
+}
+
+[data-theme="gold"] .hero-title,
+[data-theme="light"] .hero-title,
+[data-theme="neon"] .hero-title,
+[data-theme="nature"] .hero-title {
+  text-shadow: none;
+}
+/* ================= NEON + NATURE TEXT BOOST ================= */
+
+[data-theme="neon"] .panel,
+[data-theme="neon"] .card-small,
+[data-theme="nature"] .panel,
+[data-theme="nature"] .card-small {
+  color: rgba(255,255,255,0.95);
+}
+
+[data-theme="neon"] .footer-muted,
+[data-theme="nature"] .footer-muted {
+  color: rgba(255,255,255,0.75);
+}
+/* ==========================================
+   TABLE HEADER VISIBILITY FIX
+   (Nature, Neon, Light, Gold only)
+========================================== */
+
+[data-theme="nature"] .table th,
+[data-theme="neon"] .table th,
+[data-theme="light"] .table th,
+[data-theme="gold"] .table th {
+  color: var(--text-main);
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* Subtle divider so header row is visible */
+[data-theme="nature"] .table thead tr,
+[data-theme="neon"] .table thead tr,
+[data-theme="light"] .table thead tr,
+[data-theme="gold"] .table thead tr {
+  border-bottom: 1px solid var(--surface-border);
+}
+
+/* Extra clarity for Nature & Neon (bright gradients) */
+[data-theme="nature"] .table th,
+[data-theme="neon"] .table th {
+  text-shadow: 0 1px 1px rgba(0,0,0,0.25);
+}
+/* ==========================================
+   DONOR CARD TEXT VISIBILITY FIX
+   (Light & Gold only)
+========================================== */
+
+[data-theme="light"] .panel,
+[data-theme="light"] .card-small,
+[data-theme="gold"] .panel,
+[data-theme="gold"] .card-small {
+  color: var(--text-main);
+}
+
+/* Donor name */
+[data-theme="light"] .panel h3,
+[data-theme="light"] .panel h4,
+[data-theme="gold"] .panel h3,
+[data-theme="gold"] .panel h4 {
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* Donor meta text (phone, address, city, availability) */
+[data-theme="light"] .panel p,
+[data-theme="light"] .panel span,
+[data-theme="light"] .panel div,
+[data-theme="gold"] .panel p,
+[data-theme="gold"] .panel span,
+[data-theme="gold"] .panel div {
+  color: var(--text-soft);
+}
+
+/* IMPORTANT: force primary info visible */
+[data-theme="light"] .panel strong,
+[data-theme="light"] .panel .primary-text,
+[data-theme="gold"] .panel strong,
+[data-theme="gold"] .panel .primary-text {
+  color: var(--text-main);
+}
+
+/* Blood group badge stays readable */
+[data-theme="light"] .badge,
+[data-theme="gold"] .badge {
+  color: #fff;
+}
+
+/* ==========================================
+   LIGHT THEME — HARD TEXT VISIBILITY FIX
+========================================== */
+
+/* Force full opacity inside cards */
+[data-theme="light"] .panel *,
+[data-theme="light"] .card-small * {
+  opacity: 1 !important;
+}
+
+/* Donor NAME */
+[data-theme="light"] .panel h3,
+[data-theme="light"] .panel h4,
+[data-theme="light"] .panel strong {
+  color: #0f172a !important;   /* dark slate */
+  font-weight: 700;
+}
+
+/* Phone, availability, city, address */
+[data-theme="light"] .panel span,
+[data-theme="light"] .panel p,
+[data-theme="light"] .panel div {
+  color: #374151 !important;   /* readable gray */
+}
+
+/* Linked user + address labels */
+[data-theme="light"] .panel small {
+  color: #6b7280 !important;
+}
+
+/* Blood group badge text stays white */
+[data-theme="light"] .panel .badge,
+[data-theme="light"] .panel .blood-badge {
+  color: #ffffff !important;
+}
+
+/* ==========================================
+   GOLD THEME — HARD TEXT VISIBILITY FIX
+========================================== */
+
+/* Kill opacity issues inside cards */
+[data-theme="gold"] .panel *,
+[data-theme="gold"] .card-small * {
+  opacity: 1 !important;
+}
+
+/* Donor name / headings */
+[data-theme="gold"] .panel h3,
+[data-theme="gold"] .panel h4,
+[data-theme="gold"] .panel strong {
+  color: #1f2937 !important;   /* deep charcoal */
+  font-weight: 700;
+}
+
+/* Main content text (phone, city, availability) */
+[data-theme="gold"] .panel span,
+[data-theme="gold"] .panel p,
+[data-theme="gold"] .panel div {
+  color: #374151 !important;   /* readable gray */
+}
+
+/* Muted secondary info */
+[data-theme="gold"] .panel small,
+[data-theme="gold"] .footer-muted {
+  color: #6b7280 !important;
+}
+
+/* Blood group badge text stays white */
+[data-theme="gold"] .panel .badge,
+[data-theme="gold"] .panel .blood-badge {
+  color: #ffffff !important;
+}
+
+/* Buttons stay sharp */
+[data-theme="gold"] .btn {
+  color: #ffffff;
+  font-weight: 600;
+}
+

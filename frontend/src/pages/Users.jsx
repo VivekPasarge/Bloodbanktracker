@@ -1,0 +1,3 @@
+import React, {useEffect,useState} from 'react'
+import { getUsers } from '../services/userService'
+export default function Users(){ const [u,setU]=useState([]); useEffect(()=>{ getUsers().then(r=>setU(r.data||r)).catch(()=>{}) },[]); return (<div><h1>Users</h1><div className="panel">{u.map(x=> <div key={x.id} style={{padding:8,borderTop:'1px solid #eef2f7'}}>{x.username||x.email}</div>)}</div></div>)}
