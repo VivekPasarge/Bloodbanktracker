@@ -1,8 +1,8 @@
 package com.yourorg.bloodbank.controller;
 
-import org.springframework.web.bind.annotation.*;
 import com.yourorg.bloodbank.entity.Delivery;
 import com.yourorg.bloodbank.repository.DeliveryRepository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -10,18 +10,41 @@ import java.util.List;
 @RequestMapping("/api/deliveries")
 @CrossOrigin(origins = "http://localhost:5173")
 public class DeliveryController {
+
     private final DeliveryRepository repo;
-    public DeliveryController(DeliveryRepository repo){ this.repo = repo; }
+
+    public DeliveryController(DeliveryRepository repo) {
+        this.repo = repo;
+    }
 
     @GetMapping
-    public List<Delivery> all(){ return repo.findAll(); }
+    public List<Delivery> all() {
+        return repo.findAll();
+    }
 
     @PostMapping
-    public Delivery create(@RequestBody Delivery d){ d.setStatus(d.getStatus()==null?"PENDING":d.getStatus()); return repo.save(d); }
+    public Delivery create(@RequestBody Delivery d) {
+        if (d.getStatus() == null) {
+            d.setStatus("PENDING");
+        }
+        return repo.save(d);
+    }
 
     @PutMapping("/{id}/status")
-    public Delivery updateStatus(@PathVariable Long id, @RequestParam String status){
-        return repo.findById(id).map(existing -> { existing.setStatus(status); return repo.save(existing); })
+    public Delivery updateStatus(
+            @PathVariable Long id,
+            @RequestParam String status
+    ) {
+        return repo.findById(id)
+                .map(existing -> {
+                    existing.setStatus(status);
+                    return repo.save(existing);
+                })
                 .orElseThrow(() -> new RuntimeException("Delivery not found"));
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id) {
+        repo.deleteById(id);
     }
 }

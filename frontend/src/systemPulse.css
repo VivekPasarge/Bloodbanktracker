@@ -1,0 +1,86 @@
+/* =====================================================
+   SHARED ECG BASE (Admin + User)
+===================================================== */
+
+.pulse-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.pulse-svg path {
+  fill: none;
+  stroke: var(--accent);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 600;
+  stroke-dashoffset: 600;
+}
+
+/* Smooth ECG animation */
+@keyframes pulseMove {
+  0% {
+    stroke-dashoffset: 600;
+    opacity: 0.4;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 0.4;
+  }
+}
+
+/* =====================================================
+   ADMIN ECG (System activity)
+===================================================== */
+
+.system-pulse {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;              /* 🔥 FIX */
+  opacity: 0.12;           /* visible but subtle */
+}
+
+.system-pulse .pulse-svg path {
+  stroke-width: 2.2;
+  animation: pulseMove 3s linear infinite;
+}
+
+.admin-header {
+  min-height: 160px;        /* gives ECG room */
+  display: flex;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* =====================================================
+   USER ECG (Motivational, softer)
+===================================================== */
+
+.user-pulse {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;              /* 🔥 FIX */
+  opacity: 0.08;
+}
+
+.user-pulse .pulse-svg path {
+  stroke-width: 1.6;
+  animation: pulseMove 5.5s ease-in-out infinite;
+}
+
+/* =====================================================
+   TEXT MUST STAY ABOVE ECG
+===================================================== */
+
+.colorful-title,
+.hero-title,
+.hero-tagline {
+  position: relative;
+  z-index: 2;
+}

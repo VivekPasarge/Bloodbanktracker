@@ -1,142 +1,145 @@
-// src/pages/Deliveries.jsx
 import React, { useEffect, useState } from 'react';
-import { getDeliveries, updateDeliveryStatus, deleteDelivery } from '../services/deliveryService';
-import { isAdmin } from '../services/authUtils'
+import { useNavigate } from 'react-router-dom';
+import {
+  getDeliveries,
+  updateDeliveryStatus,
+  deleteDelivery
+} from '../services/deliveryService';
+import { isAdmin } from '../services/authUtils';
 
-export default function Deliveries(){
-  const [items, setItems] = useState(null); // null = loading, [] = loaded-empty
-  const [error, setError] = useState(null);
-  const admin = isAdmin()
+export default function Deliveries() {
+  const [items, setItems] = useState(null);
+  const navigate = useNavigate();
+  const admin = isAdmin();
 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await getDeliveries();
-        console.log('[Deliveries] raw response:', res);
-
-        const body = res?.data ?? res;
-
-        // tolerate different API shapes
-        let list = [];
-        if (Array.isArray(body)) {
-          list = body;
-        } else if (body && typeof body === 'object') {
-          list = body.items || body.deliveries || body.data || body.results || [];
-          if (!list.length) {
-            for (const k of Object.keys(body)) {
-              if (Array.isArray(body[k])) { list = body[k]; break; }
-            }
-          }
-        }
-        if (!Array.isArray(list) && body && typeof body === 'object') list = [body];
-        console.log('[Deliveries] parsed list:', list);
-        setItems(Array.isArray(list) ? list : []);
-      } catch (err) {
-        console.error('[Deliveries] load error', err);
-        setError(err);
-        setItems([]); // show "no deliveries found" UI
-      }
-    })();
+    load();
   }, []);
 
-  async function setStatus(id, status){
-    try {
-      await updateDeliveryStatus(id, status);
-      setItems(prev => prev.map(x => x.id === id ? {...x, status} : x));
-    } catch(err){
-      console.error(err);
-      alert('Update failed');
-    }
+  async function load() {
+    const res = await getDeliveries();
+    setItems(res.data || []);
   }
 
-  async function remove(id){
-    if(!confirm('Delete this delivery?')) return;
-    try {
-      await deleteDelivery(id);
-      setItems(prev => prev.filter(x => x.id !== id));
-    } catch(err){
-      console.error(err);
-      alert('Delete failed');
-    }
-  }
-
-  // helper to read multiple field name styles
-  function field(x, ...names){
-    for (const n of names) {
-      if (x == null) return undefined;
-      if (n.includes('.')) {
-        const parts = n.split('.');
-        let cur = x;
-        for (const p of parts) { if (cur == null) { cur = undefined; break; } cur = cur[p]; }
-        if (cur !== undefined) return cur;
-      } else {
-        if (x[n] !== undefined && x[n] !== null) return x[n];
-      }
-    }
-    return undefined;
-  }
-
-  if (items === null) return <div className="panel">Loading deliveries…</div>;
-  if (error) return <div className="panel">Error loading deliveries — check console</div>;
-
-  if (!items.length) {
-    return (
-      <div>
-        <h1 className="colorful-title">Deliveries</h1>
-        <div className="panel">No deliveries found</div>
-        <div style={{marginTop:12,fontSize:13,color:'#94a3b8'}}>
-          Debug: open the browser console and run:
-          <div style={{marginTop:6,background:'#0b1320',color:'#cbd5e1',padding:8,borderRadius:6,display:'inline-block'}}>
-            <code>{`fetch(\`${window.location.protocol}//${window.location.hostname}:8080/api/deliveries\`).then(r=>r.json()).then(console.log).catch(console.error)`}</code>
-          </div>
-        </div>
-      </div>
+  async function setStatus(id, status) {
+    await updateDeliveryStatus(id, status);
+    setItems(prev =>
+      prev.map(d =>
+        d.id === id ? { ...d, status } : d
+      )
     );
   }
 
-  return (
-    <div>
-      <h1 className="colorful-title">Deliveries</h1>
+  async function remove(id) {
+    if (!window.confirm('Delete delivery?')) return;
+    await deleteDelivery(id);
+    setItems(prev => prev.filter(d => d.id !== id));
+  }
 
-      <div className="panel" style={{overflowX:'auto', marginTop:12}}>
+  if (items === null) {
+    return <div className="panel">Loading deliveries…</div>;
+  }
+
+  return (
+  <div>
+    {/* ===== HEADER ===== */}
+    <div className="page-header" style={{ marginBottom: 24 }}>
+      <div className="header-left">
+        <button
+          className="btn secondary"
+          onClick={() => navigate("/dashboard")}
+        >
+          ← Back
+        </button>
+      </div>
+
+      <h1 className="page-title centered">Deliveries</h1>
+
+      <div className="header-right">
+        {admin && (
+          <button
+            className="btn primary"
+            onClick={() => navigate("/deliveries/new")}
+          >
+            + Add Delivery
+          </button>
+        )}
+      </div>
+    </div>
+
+    {/* ===== EMPTY STATE ===== */}
+    {!items.length && (
+      <div className="panel">No deliveries found</div>
+    )}
+
+    {/* ===== TABLE ===== */}
+    {!!items.length && (
+      <div className="panel">
         <table className="table">
           <thead>
-            <tr><th>ID</th><th>Contact</th><th>Phone</th><th>Pickup</th><th>Drop</th><th>Status</th><th>Actions</th></tr>
+            <tr>
+              <th>ID</th>
+              <th>Contact</th>
+              <th>Phone</th>
+              <th>Pickup</th>
+              <th>Drop</th>
+              <th>Status</th>
+              {admin && <th>Actions</th>}
+            </tr>
           </thead>
+
           <tbody>
-            {items.map(x => {
-              const id = field(x,'id','Id');
-              const contact = field(x,'contact_name','contactName','name','contact');
-              const phone = field(x,'contact_phone','contactPhone','phone','mobile');
-              const pickup = field(x,'pickup_address','pickupAddress','pickup','pick_up_address');
-              const drop = field(x,'drop_address','dropAddress','drop','drop_off_address');
-              const status = field(x,'status','state');
+            {items.map(d => (
+              <tr key={d.id}>
+                <td>{d.id}</td>
+                <td>{d.contactName}</td>
+                <td>{d.contactPhone}</td>
+                <td>{d.pickupAddress}</td>
+                <td>{d.dropAddress}</td>
 
-              return (
-                <tr key={id ?? JSON.stringify(x).slice(0,40)}>
-                  <td>{id ?? '—'}</td>
-                  <td>{contact ?? '—'}</td>
-                  <td>{phone ?? '—'}</td>
-                  <td>{pickup ?? '—'}</td>
-                  <td>{drop ?? '—'}</td>
-                  <td>{status ?? '—'}</td>
-                  <td style={{ display: 'flex', gap: '8px' }}>
-  {admin && (
-  <>
-    <button className="btn" onClick={() => setStatus(id,'IN_TRANSIT')}>In transit</button>
-    <button className="btn" onClick={() => setStatus(id,'DELIVERED')}>Delivered</button>
-    <button className="btn" style={{background:'#b91c1c'}} onClick={() => remove(id)}>Delete</button>
-  </>
-)}
+                {/* STATUS */}
+                <td>
+                  <span className={`status-badge ${d.status}`}>
+                    {d.status.replace("_", " ")}
+                  </span>
+                </td>
 
-</td>
+                {/* ACTIONS */}
+                {admin && (
+                  <td>
+                    <div className="actions">
+                      <button
+                        className="btn secondary"
+                        disabled={d.status === "IN_TRANSIT"}
+                        onClick={() => setStatus(d.id, "IN_TRANSIT")}
+                      >
+                        In Transit
+                      </button>
 
-                </tr>
-              );
-            })}
+                      <button
+                        className="btn primary"
+                        disabled={d.status === "DELIVERED"}
+                        onClick={() => setStatus(d.id, "DELIVERED")}
+                      >
+                        Delivered
+                      </button>
+
+                      <button
+                        className="btn danger"
+                        onClick={() => remove(d.id)}
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                )}
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
-    </div>
-  );
+    )}
+  </div>
+);
+
 }

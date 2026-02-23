@@ -1,0 +1,362 @@
+/* ==================================================
+   HOME PAGE — FINAL CLEAN LOCK
+================================================== */
+
+.home-page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  color: var(--text-main);
+}
+
+/* ==================================================
+   HERO SECTION
+================================================== */
+
+.home-hero {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+/* MAIN TITLE */
+.hero-title-main {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 900;
+  letter-spacing: 0.4px;
+  color: var(--text-main);
+  margin: 0;
+  position: relative;
+}
+
+/* ACCENT UNDERLINE */
+.hero-title-main::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 3px;
+  margin: 14px auto 18px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--accent),
+    transparent
+  );
+}
+
+/* SUBTITLE */
+.hero-subtitle {
+  max-width: 860px;
+  margin: 0 auto 40px;
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: color-mix(
+    in srgb,
+    var(--text-main) 78%,
+    var(--text-soft)
+  );
+}
+
+/* THEME SAFETY */
+[data-theme="light"] .hero-title-main,
+[data-theme="gold"] .hero-title-main,
+[data-theme="sunset"] .hero-title-main,
+[data-theme="nature"] .hero-title-main {
+  text-shadow: none;
+}
+
+[data-theme="default"] .hero-title-main,
+[data-theme="night"] .hero-title-main,
+[data-theme="purple"] .hero-title-main {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+}
+
+/* ==================================================
+   HERO STATS
+================================================== */
+
+.hero-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(220px, 1fr));
+  gap: 32px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hero-card {
+  padding: 24px 22px;
+  border-radius: 20px;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface-bg) 85%, transparent),
+    color-mix(in srgb, var(--surface-bg) 65%, transparent)
+  );
+  border: 1px solid var(--surface-border);
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 18px 42px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.22);
+  transition: transform 0.25s ease;
+}
+
+.hero-card:hover {
+  transform: translateY(-6px);
+}
+
+.hero-card strong {
+  display: block;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--accent);
+}
+
+.hero-card span {
+  font-size: 13.5px;
+  color: var(--text-soft);
+}
+
+/* ==================================================
+   SECTION BOX
+================================================== */
+
+.section-box {
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--surface-bg) 88%, transparent),
+    color-mix(in srgb, var(--surface-bg) 72%, transparent)
+  );
+  border: 1px solid var(--surface-border);
+  border-radius: 22px;
+  padding: 30px;
+  margin-bottom: 56px;
+  backdrop-filter: blur(18px);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,0.32),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+}
+
+.section-box h2 {
+  margin-bottom: 22px;
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* ==================================================
+   MAP SECTION (ISOLATED & STABLE)
+================================================== */
+
+.map-section {
+  width: 100%;
+}
+
+/* SEARCH BAR */
+.map-search {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-bg);
+  color: var(--text-main);
+  font-size: 14px;
+  outline: none;
+}
+
+.map-search::placeholder {
+  color: var(--text-soft);
+}
+
+.map-search:focus {
+  border-color: var(--accent);
+}
+
+/* MAP WRAPPER */
+.live-map-wrapper {
+  width: 100%;
+  height: 320px;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  background: var(--surface-bg);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+}
+
+.live-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* LEAFLET CONTROLS */
+.leaflet-control-zoom a {
+  background: var(--surface-bg);
+  color: var(--text-main);
+  border: 1px solid var(--surface-border);
+}
+
+.leaflet-control-zoom a:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+  background: var(--surface-bg);
+  color: var(--text-main);
+  border-radius: 12px;
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width: 1024px) {
+  .hero-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-title-main {
+    font-size: 28px;
+  }
+
+  .hero-subtitle {
+    font-size: 14.5px;
+  }
+}
+
+
+
+/* ==================================================
+   BLOOD INVENTORY — 4 x 2 LOCKED GRID
+   (Desktop first, safe & predictable)
+================================================== */
+
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 🔒 exactly 4 per row */
+  gap: 36px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* each circle stays same size */
+.inventory-grid > * {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 1024px) {
+  .inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .inventory-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================================================
+   BLOOD INVENTORY — FINAL LOCKED GRID (NO SIDE EFFECTS)
+================================================== */
+
+/* inventory container only */
+.section-box.inventory-section {
+  padding: 36px 30px;
+}
+
+/* STRICT 4 x 2 GRID */
+.inventory-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 🔒 exactly 4 per row */
+  gap: 36px;
+  justify-items: center;
+  align-items: center;
+}
+
+/* FIXED SIZE FOR CIRCLES (prevents stretch) */
+.inventory-grid > * {
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================================================
+   RESPONSIVE (ONLY INVENTORY)
+================================================== */
+
+@media (max-width: 1024px) {
+  .inventory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .inventory-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==================================================
+   ML STOCK RISK — STATUS COLORS + GLOW (THEME SAFE)
+================================================== */
+
+.ml-risk {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Common risk text */
+.ml-risk .risk {
+  font-size: 32px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+/* ---------- SAFE ---------- */
+.ml-risk.safe {
+  border-left: 5px solid #22c55e;
+  box-shadow:
+    0 0 0 rgba(0,0,0,0),
+    inset 0 0 0 rgba(0,0,0,0);
+}
+
+.ml-risk.safe .risk {
+  color: #22c55e;
+  text-shadow: 0 0 14px rgba(34,197,94,0.55);
+}
+
+/* ---------- WARNING ---------- */
+.ml-risk.warning {
+  border-left: 5px solid #f59e0b;
+}
+
+.ml-risk.warning .risk {
+  color: #f59e0b;
+  text-shadow: 0 0 14px rgba(245,158,11,0.55);
+}
+
+/* ---------- CRITICAL ---------- */
+.ml-risk.critical {
+  border-left: 5px solid #ef4444;
+}
+
+.ml-risk.critical .risk {
+  color: #ef4444;
+  text-shadow: 0 0 16px rgba(239,68,68,0.65);
+}
+
+/* Subtext */
+.ml-risk .muted {
+  font-size: 14px;
+  color: var(--text-soft);
+}

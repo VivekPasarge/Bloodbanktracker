@@ -1,22 +1,59 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { getDonors } from "../services/donorService";
 
 export default function UserDashboard() {
+  const [isDonor, setIsDonor] = useState(false);
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    async function checkDonor() {
+      try {
+        const res = await getDonors();
+        const donors = res.data || [];
+
+        const exists = donors.some(
+          d => String(d.userId ?? d.user_id) === String(userId)
+        );
+
+        setIsDonor(exists);
+      } catch (e) {
+        console.error(e);
+      }
+    }
+
+    if (userId) checkDonor();
+  }, [userId]);
+
   return (
     <div>
-      <h1 className="colorful-title">Your Dashboard</h1>
+      <h1 className="colorful-title">
+        Welcome, {localStorage.getItem("name")}
+      </h1>
 
-      <div className="panel">
-        <p className="footer-muted">
-          You can request blood, donate, and track your activity here.
-        </p>
+      <div className="dashboard-grid">
+        <Link to="/requests/new" className="dashboard-card user-card">
+          Request Blood
+        </Link>
 
-        <div style={{ display: 'flex', gap: 12, marginTop: 16 }}>
-          <Link to="/requests" className="btn">Request Blood</Link>
-          <Link to="/donors" className="btn">Donate Blood</Link>
-          <Link to="/deliveries" className="btn">Track Deliveries</Link>
-        </div>
+        {!isDonor ? (
+          <Link to="/become-donor" className="dashboard-card user-card">
+            Become a Donor
+          </Link>
+        ) : (
+          <Link to="/donors" className="dashboard-card user-card">
+            My Donor Profile
+          </Link>
+        )}
+
+        <Link to="/hospitals" className="dashboard-card user-card">
+          View Hospitals
+        </Link>
+
+        <Link to="/deliveries" className="dashboard-card user-card">
+          Track Deliveries
+        </Link>
       </div>
     </div>
-  )
+  );
 }

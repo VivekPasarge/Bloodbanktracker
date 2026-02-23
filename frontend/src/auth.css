@@ -1,0 +1,289 @@
+/* ================= RESET / FULLSCREEN FIX ================= */
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body.auth-mode {
+  overflow: hidden;
+}
+
+/* ================= HERO CONTAINER ================= */
+
+.auth-hero {
+  position: fixed;        /* 🔑 true fullscreen */
+  inset: 0;
+
+  background-image: url("/auth-blood.png");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+
+  display: block;
+}
+
+/* ================= OVERLAY ================= */
+
+.auth-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 70, 50, 0.85) 0%,
+    rgba(6, 70, 50, 0.6) 40%,
+    rgba(6, 70, 50, 0.35) 75%,
+    rgba(6, 70, 50, 0.2) 100%
+  );
+  z-index: 1;
+}
+
+/* ================= TOP RIGHT ================= */
+
+.auth-top-actions {
+  position: absolute;
+  top: 28px;
+  right: 36px;
+  z-index: 4;
+}
+
+.ghost-btn {
+  padding: 8px 20px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.65);
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+.ghost-btn:hover {
+  background: rgba(255,255,255,0.18);
+}
+
+/* ================= HERO HEADER ================= */
+
+.auth-hero-header {
+  position: absolute;
+  top: 110px;               /* 🔑 below doctor head */
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 3;
+}
+
+.auth-main-title {
+  font-size: 96px;          /* 🔑 bigger headline */
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: #ffffff;
+  margin: 0;
+  line-height: 1.02;
+}
+
+.auth-main-title span {
+  color: #e11d48;
+  text-shadow:
+    0 0 14px rgba(225,29,72,0.8),
+    0 0 30px rgba(225,29,72,0.45);
+}
+
+/* ================= ECG ================= */
+
+.auth-header-ecg {
+  width: calc(100% + 140px);
+  height: 56px;
+  margin-top: -8px;
+  margin-left: -70px;
+}
+
+.auth-header-ecg polyline {
+  stroke: #b91c1c;
+  stroke-width: 6;
+  stroke-dasharray: 900;
+  stroke-dashoffset: 900;
+  animation: ecgFlow 3.2s ease-in-out infinite;
+  filter:
+    drop-shadow(0 0 6px rgba(185,28,28,0.8))
+    drop-shadow(0 0 16px rgba(185,28,28,0.5));
+}
+
+@keyframes ecgFlow {
+  0% { stroke-dashoffset: 900; opacity: 0.4; }
+  35% { stroke-dashoffset: 0; opacity: 1; }
+  100% { stroke-dashoffset: -900; opacity: 0.4; }
+}
+
+/* ================= LOGIN CARD (GLASS) ================= */
+
+.auth-hero-card {
+  position: absolute;
+  right: 7%;
+  top: 62%;
+  transform: translateY(-50%);
+  z-index: 3;
+
+  width: 420px;
+  padding: 44px 38px;
+  border-radius: 28px;
+
+  /* 🔑 glass effect */
+  background: rgba(255,255,255,0.22);
+  backdrop-filter: blur(28px);
+  border: 1px solid rgba(255,255,255,0.35);
+
+  box-shadow:
+    0 40px 120px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.6);
+}
+
+.auth-hero-card h2 {
+  text-align: center;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 12px;
+}
+
+/* ================= TEXT ================= */
+
+.auth-desc {
+  font-size: 14px;
+  color: rgba(255,255,255,0.85);
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+/* ================= INPUTS ================= */
+
+.auth-hero-card input {
+  width: 100%;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  border: none;
+  outline: none;
+  background: rgba(255,255,255,0.95);
+}
+
+.auth-hero-card button {
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* ================= LINKS & ERRORS ================= */
+
+.auth-link {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.auth-link a {
+  color: #e5e7eb;
+}
+
+.auth-error {
+  margin-top: 10px;
+  color: #ff6b6b;
+  text-align: center;
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 900px) {
+  .auth-main-title {
+    font-size: 56px;
+  }
+
+  .auth-hero-card {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    margin: 260px auto 0;
+    width: 90%;
+  }
+}
+/* ================= REGISTER BACKGROUND ================= */
+
+.auth-hero.register-hero {
+  background-image: url("/auth-doctor.png"); /* REGISTER IMAGE */
+}
+
+
+/* ================= LOGIN INPUT UX FIX ================= */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.auth-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  margin-top: 6px;
+}
+
+.auth-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.auth-input-wrap input {
+  width: 100%;
+  padding: 14px 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.55);
+  background: rgba(255,255,255,0.95);
+  color: #0f172a;
+  font-size: 14px;
+}
+
+.auth-input-wrap input:focus {
+  outline: none;
+  border-color: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34,197,94,0.35);
+}
+
+.auth-icon {
+  position: absolute;
+  left: 14px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+.auth-eye {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  opacity: 0.75;
+}
+
+.auth-eye:hover {
+  opacity: 1;
+}
+
+.auth-submit {
+  margin-top: 18px;
+  width: 100%;
+  padding: 14px;
+  border-radius: 999px;
+  border: none;
+  background: linear-gradient(135deg, #16a34a, #22c55e);
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}

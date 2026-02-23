@@ -1,0 +1,65 @@
+/* ==========================================
+   ML STOCK RISK — PULSE ANIMATION (STEP 6)
+   Theme-safe, logic-safe
+========================================== */
+
+.ml-risk {
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid var(--accent);
+}
+
+/* Base glow layer */
+.ml-risk::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  background: radial-gradient(
+    circle,
+    var(--accent-soft),
+    transparent 60%
+  );
+  opacity: 0.25;
+  animation: mlPulse 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+/* CRITICAL — stronger pulse */
+.ml-risk.critical::before {
+  opacity: 0.55;
+  animation-duration: 2.4s;
+}
+
+/* WARNING — medium pulse */
+.ml-risk.warning::before {
+  opacity: 0.38;
+  animation-duration: 3.2s;
+}
+
+/* SAFE — calm breathing */
+.ml-risk.safe::before {
+  opacity: 0.22;
+  animation-duration: 5.5s;
+}
+
+/* Pulse animation */
+@keyframes mlPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0.2;
+  }
+}
+
+/* Keep text above glow */
+.ml-risk > * {
+  position: relative;
+  z-index: 1;
+}

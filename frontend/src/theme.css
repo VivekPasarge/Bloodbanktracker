@@ -352,3 +352,25 @@
   font-weight: 600;
 }
 
+[data-theme="default"] .blood-image,
+[data-theme="night"] .blood-image,
+[data-theme="ai-blue"] .blood-image {
+  filter:
+    drop-shadow(0 40px 90px rgba(0,0,0,0.6))
+    saturate(1.15)
+    contrast(1.08);
+}
+[data-theme="green"] .blood-image,
+[data-theme="nature"] .blood-image {
+  filter:
+    drop-shadow(0 35px 70px rgba(0,0,0,0.35))
+    saturate(1.05)
+    contrast(1.02);
+}
+[data-theme="green"] .blood-image,
+[data-theme="nature"] .blood-image {
+  filter:
+    drop-shadow(0 35px 70px rgba(0,0,0,0.35))
+    saturate(1.05)
+    contrast(1.02);
+}

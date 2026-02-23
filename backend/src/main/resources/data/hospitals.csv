@@ -1,0 +1,98 @@
+ID,Name,Address,City,Phone,Lat,Lng,Map
+1,Apollo Hospital Bannerghatta,Bannerghatta Road,Bengaluru,+91-8046304050,12.8950,77.6033,Map
+2,Rajarajeshwari Medical College Hospital,Kengeri,Bengaluru,+91-8028412700,12.9016,77.4830,Map
+3,BGS Global Hospital,Kengeri,Bengaluru,+91-8026265555,12.9121,77.4827,Map
+4,Fortis Hospital Nagarbhavi,Nagarbhavi,Bengaluru,+91-8049511111,12.9656,77.5097,Map
+5,Vijayanagar Global Hospital,Vijayanagar,Bengaluru,+91-8049522222,12.9716,77.5375,Map
+6,Suguna Hospital,Rajarajeshwari Nagar,Bengaluru,+91-8049599999,12.9182,77.5170,Map
+7,Unity Hospital,Kengeri Satellite Town,Bengaluru,+91-8049608888,12.9054,77.4815,Map
+8,Abhaya Hospital,Kengeri,Bengaluru,+91-8049617777,12.9128,77.4862,Map
+9,Srinivasa Hospital,Kumbalgodu,Bengaluru,+91-8049626666,12.8839,77.4416,Map
+10,Shree Vinayaka Hospital,Kumbalgodu,Bengaluru,+91-8049635555,12.8845,77.4452,Map
+11,Mathru Hospital,Mysore Road,Bengaluru,+91-8049644444,12.9112,77.4879,Map
+12,Ananya Hospital,RR Nagar,Bengaluru,+91-8049653333,12.9189,77.5188,Map
+13,Sanjeevini Hospital,Nagarbhavi,Bengaluru,+91-8049662222,12.9622,77.5061,Map
+14,Pristine Hospital,Kengeri,Bengaluru,+91-8049671111,12.9098,77.4794,Map
+16,Bharath Hospital,RR Nagar,Bengaluru,+91-8049699999,12.9214,77.5202,Map
+17,Janani Hospital,Kengeri,Bengaluru,+91-8049708888,12.9077,77.4821,Map
+18,Om Sai Hospital,Kumbalgodu,Bengaluru,+91-8049717777,12.8822,77.4391,Map
+20,Navodaya Hospital,RR Nagar,Bengaluru,+91-8049735555,12.9206,77.5169,Map
+21,City Care Hospital,Kengeri,Bengaluru,+91-8049744444,12.9063,77.4849,Map
+22,Sparsh Hospital,RR Nagar,Bengaluru,+91-8049753333,12.9198,77.5197,Map
+23,Shushrusha Hospital,Mysore Road,Bengaluru,+91-8049762222,12.8984,77.4672,Map
+25,GreenView Hospital,Kengeri,Bengaluru,+91-8049780000,12.9089,77.4807,Map
+26,Sri Sai Hospital,Kengeri Satellite Town,Bengaluru,+91-8049791111,12.9048,77.4836,Map
+27,Grace Hospital,RR Nagar,Bengaluru,+91-8049802222,12.9191,77.5224,Map
+28,Sushruta Hospital,Nagarbhavi,Bengaluru,+91-8049813333,12.9635,77.5089,Map
+29,MedCare Hospital,Mysore Road,Bengaluru,+91-8049824444,12.8971,77.4698,Map
+30,Arogya Hospital,Kumbalgodu,Bengaluru,+91-8049835555,12.8864,77.4382,Map
+31,Shanthi Hospital,Kengeri,Bengaluru,+91-8049846666,12.9107,77.4785,Map
+32,People Care Hospital,RR Nagar,Bengaluru,+91-8049857777,12.9176,77.5153,Map
+33,Sri Durga Hospital,Nagarbhavi,Bengaluru,+91-8049868888,12.9612,77.5047,Map
+34,Motherhood Hospital,Mysore Road,Bengaluru,+91-8049879999,12.8999,77.4711,Map
+35,Janatha Hospital,Kengeri,Bengaluru,+91-8049880001,12.9083,77.4856,Map
+36,Sri Krishna Hospital,Kumbalgodu,Bengaluru,+91-8049881111,12.8841,77.4439,Map
+37,Hope Hospital,RR Nagar,Bengaluru,+91-8049882222,12.9223,77.5178,Map
+38,LifeLine Hospital,Nagarbhavi,Bengaluru,+91-8049883333,12.9594,77.5021,Map
+39,New Town Hospital,Kengeri,Bengaluru,+91-8049884444,12.9071,77.4802,Map
+40,Wellness Hospital,Mysore Road,Bengaluru,+91-8049885555,12.8962,77.4664,Map
+41,Sri Ganesh Hospital,Kumbalgodu,Bengaluru,+91-8049886666,12.8833,77.4411,Map
+42,Safecare Hospital,RR Nagar,Bengaluru,+91-8049887777,12.9202,77.5216,Map
+43,Vivekananda Hospital,Nagarbhavi,Bengaluru,+91-8049888888,12.9641,77.5072,Map
+44,PrimeCare Hospital,Kengeri,Bengaluru,+91-8049889999,12.9094,77.4829,Map
+45,City Life Hospital,Mysore Road,Bengaluru,+91-8049891111,12.8987,77.4686,Map
+46,Sri Venkateshwara Hospital,Kumbalgodu,Bengaluru,+91-8049892222,12.8872,77.4448,Map
+47,Healing Touch Hospital,RR Nagar,Bengaluru,+91-8049893333,12.9187,77.5162,Map
+48,Navjeevan Hospital,Nagarbhavi,Bengaluru,+91-8049894444,12.9607,77.5058,Map
+49,Star Hospital,Kengeri,Bengaluru,+91-8049895555,12.9066,77.4841,Map
+50,Trust Hospital,Mysore Road,Bengaluru,+91-8049896666,12.8978,77.4703,Map
+51,Janani Hospital,Kengeri Main Road,Bengaluru,+91-8050011111,12.9098,77.4865,Map
+52,Sai Ram Hospital,Kumbalgodu,Bengaluru,+91-8050022222,12.8856,77.4397,Map
+53,Green Valley Hospital,RR Nagar,Bengaluru,+91-8050033333,12.9218,77.5191,Map
+54,Sanjivini Hospital,Nagarbhavi,Bengaluru,+91-8050044444,12.9624,77.5063,Map
+55,Metro Hospital,Mysore Road,Bengaluru,+91-8050055555,12.8991,77.4729,Map
+56,Sri Lakshmi Hospital,Kengeri,Bengaluru,+91-8050066666,12.9089,77.4817,Map
+57,Unity Hospital,RR Nagar,Bengaluru,+91-8050077777,12.9194,77.5146,Map
+58,Shree Hospital,Nagarbhavi,Bengaluru,+91-8050088888,12.9619,77.5034,Map
+59,Care Plus Hospital,Mysore Road,Bengaluru,+91-8050099999,12.8984,77.4678,Map
+60,Sri Balaji Hospital,Kumbalgodu,Bengaluru,+91-8050100000,12.8849,77.4421,Map
+61,Swasthya Hospital,Kengeri,Bengaluru,+91-8050111111,12.9105,77.4843,Map
+62,Sanjeev Hospital,RR Nagar,Bengaluru,+91-8050122222,12.9227,77.5209,Map
+63,Navya Hospital,Nagarbhavi,Bengaluru,+91-8050133333,12.9638,77.5081,Map
+64,Global Care Hospital,Mysore Road,Bengaluru,+91-8050144444,12.8973,77.4692,Map
+65,Sri Rama Hospital,Kumbalgodu,Bengaluru,+91-8050155555,12.8861,77.4456,Map
+66,Aashirvad Hospital,Kengeri,Bengaluru,+91-8050166666,12.9076,77.4798,Map
+67,Pragathi Hospital,RR Nagar,Bengaluru,+91-8050177777,12.9182,77.5169,Map
+68,Sunrise Hospital,Nagarbhavi,Bengaluru,+91-8050188888,12.9603,77.5049,Map
+69,Mysore Road Hospital,Mysore Road,Bengaluru,+91-8050199999,12.9002,77.4737,Map
+70,Sri Sathya Hospital,Kumbalgodu,Bengaluru,+91-8050200000,12.8837,77.4419,Map
+71,Life Care Hospital,Kengeri,Bengaluru,+91-8050211111,12.9092,77.4821,Map
+72,New Hope Hospital,RR Nagar,Bengaluru,+91-8050222222,12.9213,77.5185,Map
+73,Sri Matha Hospital,Nagarbhavi,Bengaluru,+91-8050233333,12.9629,77.5074,Map
+74,Healing Care Hospital,Mysore Road,Bengaluru,+91-8050244444,12.8968,77.4669,Map
+75,Sri Sai Krupa Hospital,Kumbalgodu,Bengaluru,+91-8050255555,12.8854,77.4441,Map
+76,Raksha Hospital,Kengeri,Bengaluru,+91-8050266666,12.9081,77.4806,Map
+77,Sanjeevani Hospital,RR Nagar,Bengaluru,+91-8050277777,12.9208,77.5174,Map
+78,Om Shakthi Hospital,Nagarbhavi,Bengaluru,+91-8050288888,12.9614,77.5057,Map
+79,MediCare Plus Hospital,Mysore Road,Bengaluru,+91-8050299999,12.8996,77.4716,Map
+80,Shree Balaji Hospital,Kumbalgodu,Bengaluru,+91-8050300000,12.8846,77.4428,Map
+81,Amrutha Hospital,Kengeri,Bengaluru,+91-8050311111,12.9099,77.4834,Map
+82,Swasthi Hospital,RR Nagar,Bengaluru,+91-8050322222,12.9221,77.5201,Map
+83,Pranav Hospital,Nagarbhavi,Bengaluru,+91-8050333333,12.9632,77.5066,Map
+84,City Health Hospital,Mysore Road,Bengaluru,+91-8050344444,12.8979,77.4681,Map
+85,Sri Nandi Hospital,Kumbalgodu,Bengaluru,+91-8050355555,12.8868,77.4463,Map
+86,Goodwill Hospital,Kengeri,Bengaluru,+91-8050366666,12.9072,77.4791,Map
+87,TrustCare Hospital,RR Nagar,Bengaluru,+91-8050377777,12.9189,77.5158,Map
+88,Divine Hospital,Nagarbhavi,Bengaluru,+91-8050388888,12.9609,77.5042,Map
+89,New Life Hospital,Mysore Road,Bengaluru,+91-8050399999,12.8989,77.4708,Map
+90,Sri Vinayaka Hospital,Kumbalgodu,Bengaluru,+91-8050400000,12.8839,77.4413,Map
+91,Arogya Plus Hospital,Kengeri,Bengaluru,+91-8050411111,12.9101,77.4849,Map
+92,Swasthik Hospital,RR Nagar,Bengaluru,+91-8050422222,12.9216,77.5197,Map
+93,Shiva Hospital,Nagarbhavi,Bengaluru,+91-8050433333,12.9621,77.5079,Map
+94,Metro Care Hospital,Mysore Road,Bengaluru,+91-8050444444,12.8975,77.4673,Map
+95,Sri Tulasi Hospital,Kumbalgodu,Bengaluru,+91-8050455555,12.8859,77.4447,Map
+96,WellLife Hospital,Kengeri,Bengaluru,+91-8050466666,12.9087,77.4813,Map
+97,HopeCare Hospital,RR Nagar,Bengaluru,+91-8050477777,12.9197,77.5164,Map
+98,Sri Vishwa Hospital,Nagarbhavi,Bengaluru,+91-8050488888,12.9617,77.5051,Map
+99,City Trust Hospital,Mysore Road,Bengaluru,+91-8050499999,12.8994,77.4721,Map
+100,Sri Manjunatha Hospital,Kumbalgodu,Bengaluru,+91-8050500000,12.8843,77.4435,Map

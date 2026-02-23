@@ -6,7 +6,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import com.yourorg.bloodbank.entity.BloodRequest;
+import com.yourorg.bloodbank.entity.User;
 import com.yourorg.bloodbank.repository.RequestRepository;
+import com.yourorg.bloodbank.repository.UserRepository;
 
 import java.util.List;
 
@@ -15,66 +17,75 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class RequestController {
 
-    private final RequestRepository repo;
+    private final RequestRepository requestRepo;
+    private final UserRepository userRepo;
 
-    public RequestController(RequestRepository repo) {
-        this.repo = repo;
+    public RequestController(RequestRepository requestRepo, UserRepository userRepo) {
+        this.requestRepo = requestRepo;
+        this.userRepo = userRepo;
     }
 
-    // Create a new blood request (any authenticated user)
+    // ================= CREATE REQUEST =================
     @PostMapping
-public ResponseEntity<BloodRequest> createRequest(
-        @RequestBody BloodRequest body,
-        @AuthenticationPrincipal String email
-) {
-    body.setStatus(body.getStatus() == null ? "OPEN" : body.getStatus());
+    public ResponseEntity<BloodRequest> createRequest(
+            @RequestBody BloodRequest body
+    ) {
+        String email = SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getName(); // ✅ SAFE
 
-    // USER or ADMIN → attach ownership
-    // (ADMIN can still create for themselves)
-    // find userId later if needed
-    BloodRequest saved = repo.save(body);
-    return ResponseEntity.ok(saved);
-}
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
 
+        body.setRequestedByUserId(user.getId());
+        body.setStatus("PENDING");
 
-    // List all requests (protected — adjust role in SecurityConfig if needed)
+        return ResponseEntity.ok(requestRepo.save(body));
+    }
+
+    // ================= LIST REQUESTS =================
     @GetMapping
-public ResponseEntity<List<BloodRequest>> listRequests(
-        @AuthenticationPrincipal String email
-) {
-    boolean isAdmin = SecurityContextHolder.getContext()
-            .getAuthentication()
-            .getAuthorities()
-            .stream()
-            .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+    public ResponseEntity<List<BloodRequest>> listRequests() {
 
-    if (isAdmin) {
-        return ResponseEntity.ok(repo.findAll());
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+
+        boolean isAdmin = auth.getAuthorities()
+                .stream()
+                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
+
+        if (isAdmin) {
+            return ResponseEntity.ok(requestRepo.findAll());
+        }
+
+        String email = auth.getName();
+
+        User user = userRepo.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        return ResponseEntity.ok(
+                requestRepo.findByRequestedByUserId(user.getId())
+        );
     }
 
-    // USER → return only own requests
-    // (for now, frontend already filters; later we add repo method)
-    return ResponseEntity.ok(repo.findAll());
-}
-
-    // Get single request
-    @GetMapping("/{id}")
-    public ResponseEntity<BloodRequest> getOne(@PathVariable Long id) {
-        return repo.findById(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-
-    // Update (partial/simple) — adjust to fit your app rules
+    // ================= UPDATE STATUS ONLY =================
     @PutMapping("/{id}")
-    public ResponseEntity<BloodRequest> update(@PathVariable Long id, @RequestBody BloodRequest body) {
-        return repo.findById(id).map(r -> {
-            r.setBloodType(body.getBloodType());
-            r.setUnits(body.getUnits());
-            r.setNotes(body.getNotes());
-            r.setHospitalId(body.getHospitalId());
-            r.setStatus(body.getStatus());
-            RequestRepository rRepo = this.repo;
-            BloodRequest updated = rRepo.save(r);
-            return ResponseEntity.ok(updated);
+    public ResponseEntity<BloodRequest> updateStatus(
+            @PathVariable Long id,
+            @RequestBody BloodRequest body
+    ) {
+        return requestRepo.findById(id).map(r -> {
+            if (body.getStatus() != null) {
+                r.setStatus(body.getStatus());
+            }
+            return ResponseEntity.ok(requestRepo.save(r));
         }).orElse(ResponseEntity.notFound().build());
+    }
+
+    // ================= DELETE =================
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        requestRepo.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }

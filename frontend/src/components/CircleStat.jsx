@@ -1,5 +1,5 @@
-export default function CircleStat({ label, percent, critical=false }) {
-  const angle = Math.round(percent * 3.6)
+export default function CircleStat({ label, percent, critical = false }) {
+  const angle = Math.round(percent * 3.6);
 
   return (
     <div
@@ -10,8 +10,8 @@ export default function CircleStat({ label, percent, critical=false }) {
         <div className="circle-value">{percent}%</div>
         <div className="circle-label">{label}</div>
       </div>
-      {critical && <span className="critical">CRITICAL</span>}
 
+      {critical && <span className="critical">CRITICAL</span>}
     </div>
-  )
+  );
 }

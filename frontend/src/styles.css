@@ -242,19 +242,8 @@ body {
    BUTTONS
 ========================================== */
 
-.btn {
-  background: var(--accent);
-  color: white;
-  padding: 9px 14px;
-  border: none;
-  border-radius: var(--radius);
-  cursor: pointer;
-  font-weight: 600;
-}
 
-.btn:hover {
-  opacity: 0.9;
-}
+
 
 /* ==========================================
    MAP STYLING
@@ -420,409 +409,983 @@ h2, h3 {
   height: 100%;
   border-radius: 12px;
 }
-/* ===== ADMIN DASHBOARD CARDS ===== */
-
-.admin-cards {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-top: 16px;
-}
-
-.admin-card {
-  flex: 1 1 180px;
-  max-width: 220px;
-
-  padding: 18px 20px;
-  text-align: center;
-  font-weight: 700;
-  font-size: 15px;
-
-  color: var(--text-primary, #fff);
-  text-decoration: none;
-
-  border-radius: 16px;
-
-  /* transparent / glass effect */
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,0.12),
-    rgba(255,255,255,0.04)
-  );
-
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255,255,255,0.18);
-
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-}
-
-.admin-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
-}
-
-/* ==========================================
-   ADMIN DASHBOARD – FINAL STRUCTURE
-========================================== */
+/* ================= ADMIN DASHBOARD — SMART GRID ================= */
 
 .admin-dashboard {
-  margin-top: 16px;
+  width: 100%;
+  padding-bottom: 64px;
 }
 
-/* Welcome section */
-.admin-welcome {
-  max-width: 720px;
-  margin-top: 12px;
-  margin-bottom: 28px;
-}
-
-.admin-welcome h2 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--text-main);
-}
-
-.admin-welcome p {
-  font-size: 14px;
-  line-height: 1.6;
+.admin-subtext {
+  max-width: 820px;
+  margin: 10px 0 36px;
   color: var(--text-soft);
+  line-height: 1.6;
 }
 
-/* Cards layout */
+/* 🔥 SMART GRID */
 .admin-cards {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* always 2 per row */
-  gap: 28px;
-  max-width: 900px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+
+  padding-bottom: 40px;
 }
 
-/* Card style */
+/* Card */
 .admin-card {
-  min-height: 170px;
-  padding: 28px;
+  height: 190px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  text-align: center;
-  font-size: 16px;
+  font-size: 17px;
   font-weight: 700;
-  letter-spacing: 0.3px;
-
+  text-align: center;
   text-decoration: none;
-  color: var(--text-main);
 
+  color: var(--text-main);
   border-radius: var(--radius);
 
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.14),
       rgba(255,255,255,0.04)
     ),
     var(--glass);
 
   border: 1px solid var(--surface-border);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(18px);
 
   box-shadow: var(--shadow-card);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.admin-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 16px 40px rgba(0,0,0,0.35);
-}
-
-/* Center the last (5th) card */
-.admin-card-center {
-  grid-column: 1 / -1;      /* span both columns */
-  justify-self: center;     /* center horizontally */
-  max-width: 420px;         /* same visual weight */
-  width: 100%;
-}
-
-/* Mobile */
-@media (max-width: 720px) {
-  .admin-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-card-center {
-    grid-column: auto;
-    max-width: none;
-  }
-}
-/* ==========================================
-   ADMIN DASHBOARD – FULL WIDTH FIX
-========================================== */
-
-.admin-dashboard {
-  width: 100%;
-}
-
-/* Welcome text */
-.admin-welcome {
-  max-width: 900px;
-  margin: 12px 0 36px;
-}
-
-.admin-welcome h2 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--text-main);
-}
-
-.admin-welcome p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-soft);
-}
-
-/* Cards container — THIS IS THE KEY FIX */
-.admin-cards {
-  width: 100%;
-  max-width: 1200px;          /* fills desktop nicely */
-  margin: 0 auto;             /* centers container */
-
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 36px;                  /* correct breathing space */
-}
-
-/* Card */
-.admin-card {
-  min-height: 190px;          /* larger rectangle */
-  padding: 32px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-
-  text-decoration: none;
-  color: var(--text-main);
-
-  border-radius: var(--radius);
-
-  background:
-    linear-gradient(
-      180deg,
-      rgba(255,255,255,0.14),
-      rgba(255,255,255,0.05)
-    ),
-    var(--glass);
-
-  border: 1px solid var(--surface-border);
-  backdrop-filter: blur(16px);
-
-  box-shadow: var(--shadow-card);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .admin-card:hover {
   transform: translateY(-6px);
-  box-shadow: 0 18px 44px rgba(0,0,0,0.38);
-}
-
-/* Center the last (5th) card */
-.admin-card-center {
-  grid-column: 1 / -1;     /* span both columns */
-  max-width: 520px;        /* visual balance */
-  width: 100%;
-  justify-self: center;
+  box-shadow: 0 20px 46px rgba(0,0,0,0.4);
 }
 
 /* Mobile */
 @media (max-width: 768px) {
   .admin-cards {
     grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .admin-card-center {
-    max-width: none;
   }
 }
-/* ==========================================
-   ADMIN DASHBOARD – FULL WIDTH FIX
-========================================== */
 
-.admin-dashboard {
-  width: 100%;
-}
-
-/* Welcome text */
-.admin-welcome {
-  max-width: 900px;
-  margin: 12px 0 36px;
-}
-
-.admin-welcome h2 {
-  font-size: 20px;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--text-main);
-}
-
-.admin-welcome p {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-soft);
-}
-
-/* Cards container — THIS IS THE KEY FIX */
-.admin-cards {
-  width: 100%;
-  max-width: 1200px;          /* fills desktop nicely */
-  margin: 0 auto;             /* centers container */
-
+/* GRID LAYOUT — USER DASHBOARD */
+.dashboard-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 36px;                  /* correct breathing space */
+  grid-template-columns: repeat(2, 1fr); /* ✅ 2 per row */
+  gap: 32px;
+  margin-top: 40px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-/* Card */
-.admin-card {
-  min-height: 190px;          /* larger rectangle */
-  padding: 32px;
+/* CARD BASE */
+.dashboard-card {
+  height: 220px;
+  border-radius: 22px;
+  text-decoration: none;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+  font-size: 20px;
+  font-weight: 600;
   text-align: center;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: 0.3px;
 
-  text-decoration: none;
-  color: var(--text-main);
+  transition: all 0.25s ease;
+}
 
-  border-radius: var(--radius);
+/* USER CARD STYLE */
+.user-card {
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-dark)
+    );
+
+  color: var(--text-on-accent);
+
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.35);
+}
+
+/* ================= USER DASHBOARD CARD BORDER ================= */
+
+.dashboard-card {
+  position: relative;
+
+  border: 1px solid var(--surface-border);
+  border-radius: 22px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,0.14),
-      rgba(255,255,255,0.05)
+      rgba(255,255,255,0.08),
+      rgba(0,0,0,0.15)
     ),
-    var(--glass);
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent-dark)
+    );
 
-  border: 1px solid var(--surface-border);
-  backdrop-filter: blur(16px);
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.25);
 
-  box-shadow: var(--shadow-card);
-
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
 }
 
-.admin-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 18px 44px rgba(0,0,0,0.38);
+.dashboard-card:hover {
+  transform: translateY(-8px);
+
+  border-color: var(--accent);
+
+  box-shadow:
+    0 22px 52px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.35);
+}
+.dashboard-card {
+  text-shadow: 0 2px 4px rgba(0,0,0,0.35);
 }
 
-/* Center the last (5th) card */
-.admin-card-center {
-  grid-column: 1 / -1;     /* span both columns */
-  max-width: 520px;        /* visual balance */
-  width: 100%;
-  justify-self: center;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .admin-cards {
-    grid-template-columns: 1fr;
-    gap: 24px;
-  }
-
-  .admin-card-center {
-    max-width: none;
-  }
-}
-
-/* ================= ADMIN DASHBOARD FIX ================= */
+/* ================= ADMIN DASHBOARD ================= */
 
 .admin-dashboard {
   width: 100%;
+  padding-bottom: 64px;
 }
 
-/* subtitle */
-.admin-subtext {
-  max-width: 800px;
-  margin: 8px 0 32px;
-  color: var(--text-soft);
-  line-height: 1.6;
+/* SPACE BELOW WELCOME TEXT */
+.admin-header {
+  margin-bottom: 48px; /* 🔥 THIS FIXES YOUR ISSUE */
 }
 
-/* cards container — FULL WIDTH */
+/* GRID */
 .admin-cards {
-  width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* ALWAYS 2 */
+  grid-template-columns: repeat(3, minmax(280px, 1fr));
   gap: 32px;
 }
 
-/* card */
+/* CARD */
 .admin-card {
-  height: 190px;
+  height: 180px;
+
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 17px;
-  font-weight: 700;
-  text-align: center;
   text-decoration: none;
+  font-size: 18px;
+  font-weight: 700;
 
   color: var(--text-main);
-  border-radius: var(--radius);
+  border-radius: 18px;
 
   background:
     linear-gradient(
       180deg,
-      rgba(255,255,255,0.12),
+      rgba(255,255,255,0.10),
       rgba(255,255,255,0.04)
     ),
     var(--glass);
 
   border: 1px solid var(--surface-border);
-  backdrop-filter: blur(16px);
-  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(18px);
 
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .admin-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 18px 40px rgba(0,0,0,0.35);
+  transform: translateY(-6px);
+  box-shadow: 0 22px 48px rgba(0,0,0,0.35);
 }
 
-/* center last card */
-.admin-card-center {
-  grid-column: 1 / -1;
-  width: 50%;
-  justify-self: center;
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+  .admin-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
-/* mobile */
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .admin-cards {
     grid-template-columns: 1fr;
   }
+}
 
-  .admin-card-center {
+/* ================= LOGIN FLOATING MOTION ================= */
+
+@keyframes floatSoft {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+ /* ================= LOGIN PAGE LAYOUT ================= */
+
+.login-page {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-layout {
+  width: 100%;
+  max-width: 1200px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+
+  align-items: center;
+  padding: 40px;
+}
+
+
+/* ================= LOGIN CARD ================= */
+
+.login-form-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.login-card {
+  width: 360px;
+  padding: 36px 32px;
+
+  border-radius: 20px;
+
+  background: rgba(255,255,255,0.18);
+  backdrop-filter: blur(14px);
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+
+.login-card h2 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: var(--text-main);
+}
+
+.login-card input {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+
+  border-radius: 10px;
+  border: none;
+
+  background: rgba(255,255,255,0.9);
+}
+
+.login-card .btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 12px;
+  border-radius: 999px;
+}
+
+.login-footer {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 14px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 900px) {
+  .login-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .blood-drop-visual {
+    width: 300px;
+    height: 420px;
+  }
+}
+ 
+/*========this is for to remove symbol========*/
+.blood-drop-visual {
+  display: none;
+}
+ 
+
+
+/* ================= PAGE HEADER (DELIVERIES STYLE) ================= */
+.table th {
+  color: var(--text-main);
+  font-weight: 700;
+}
+
+
+
+/* ================= HOSPITAL FORM ENHANCEMENT ================= */
+
+.hospital-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.form-grid input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255,255,255,0.95);
+  font-size: 14px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.panel form {
+  margin-top: 8px;
+}
+ 
+/* ================= COLORED ADMIN INPUTS ================= */
+
+.form-grid input {
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Hospital identity */
+.input-primary {
+  background: rgba(59, 130, 246, 0.12); /* blue */
+  border-left: 5px solid #3b82f6;
+}
+
+/* Contact + city */
+.input-contact {
+  background: rgba(34, 197, 94, 0.12); /* green */
+  border-left: 5px solid #22c55e;
+}
+
+/* Address */
+.input-address {
+  background: rgba(245, 158, 11, 0.14); /* amber */
+  border-left: 5px solid #f59e0b;
+}
+
+/* Coordinates */
+.input-geo {
+  background: rgba(168, 85, 247, 0.12); /* purple */
+  border-left: 5px solid #a855f7;
+}
+
+/* Focus state */
+.form-grid input:focus {
+  outline: none;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.25);
+}
+
+
+
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+ 
+.header-left,
+.header-right {
+  min-width: 160px; /* balances both sides */
+  display: flex;
+  justify-content: center;
+}
+.page-header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+
+  padding: 22px 28px;
+  margin-bottom: 22px;
+
+  /* TRUE GLASS — no color pollution */
+  background: var(--surface-bg);
+
+  border-radius: 16px;
+  border: 1px solid var(--surface-border);
+
+  color: var(--text-main);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 18px 36px rgba(0,0,0,0.28),
+    inset 0 1px 0 rgba(255,255,255,0.18);
+}
+.page-header h1 {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: 0.4px;
+  color: var(--text-main);
+}
+
+/* Only dark themes need shadow */
+[data-theme="default"] .page-header h1,
+[data-theme="night"] .page-header h1,
+[data-theme="ai-blue"] .page-header h1,
+[data-theme="purple"] .page-header h1 {
+  text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+}
+
+/* Bright themes must NOT have shadow */
+[data-theme="light"] .page-header h1,
+[data-theme="gold"] .page-header h1,
+[data-theme="sunset"] .page-header h1,
+[data-theme="earth"] .page-header h1,
+[data-theme="nature"] .page-header h1,
+[data-theme="neon"] .page-header h1 {
+  text-shadow: none;
+}
+.table thead {
+  background: var(--surface-bg);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--surface-border);
+}
+/* ================= BUTTON SYSTEM — FINAL ================= */
+
+.btn {
+  background: var(--glass);
+  color: var(--text-main);
+
+  padding: 9px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--surface-border);
+
+  font-weight: 600;
+  cursor: pointer;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 6px 14px rgba(0,0,0,0.22),
+    inset 0 1px 0 rgba(255,255,255,0.15);
+
+  transition:
+    background 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn * {
+  opacity: 1 !important;
+}
+
+/* PRIMARY */
+.btn.primary {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.12),
+      rgba(0,0,0,0.15)
+    ),
+    var(--accent);
+
+  color: #ffffff;
+  border-color: transparent;
+}
+
+/* SECONDARY */
+.btn.secondary {
+  background: var(--glass);
+  color: var(--text-main);
+}
+
+/* DANGER */
+.btn.danger {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,255,255,0.08),
+      rgba(0,0,0,0.25)
+    ),
+    rgba(185,28,28,0.85);
+
+  color: #ffffff;
+  border-color: rgba(185,28,28,0.6);
+}
+/* ==========================================
+   BUTTON VISIBILITY FIX — LIGHT & GOLD
+========================================== */
+
+[data-theme="light"] .btn,
+[data-theme="gold"] .btn {
+  color: #ffffff;              /* force readable text */
+}
+
+/* Secondary buttons (Back, View) */
+[data-theme="light"] .btn.secondary,
+[data-theme="gold"] .btn.secondary {
+  background: transparent;
+  color: var(--text-main);
+  border: 1px solid var(--surface-border);
+}
+
+/* Hover clarity */
+[data-theme="light"] .btn.secondary:hover,
+[data-theme="gold"] .btn.secondary:hover {
+  background: rgba(0,0,0,0.04);
+}
+
+/* Safety: never allow invisible text */
+.btn {
+  text-shadow: none;
+}
+/* ==========================================
+   INPUT BORDER FIX — LIGHT & GOLD
+========================================== */
+
+[data-theme="light"] input,
+[data-theme="light"] select,
+[data-theme="light"] textarea,
+[data-theme="gold"] input,
+[data-theme="gold"] select,
+[data-theme="gold"] textarea {
+  border: 1px solid var(--surface-border);
+  background: var(--surface-bg);
+  color: var(--text-main);
+}
+
+/* Focus state */
+[data-theme="light"] input:focus,
+[data-theme="light"] select:focus,
+[data-theme="light"] textarea:focus,
+[data-theme="gold"] input:focus,
+[data-theme="gold"] select:focus,
+[data-theme="gold"] textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+/* ==========================================
+   ADD DONOR — STRUCTURE & SIZE FIX
+========================================== */
+
+.add-donor-card {
+  width: 100%;
+  max-width: 720px;
+}
+
+
+/* compact header */
+.page-header.compact {
+  padding: 16px 20px;
+  margin-bottom: 28px;
+}
+
+.page-header.compact h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+/* form layout */
+.donor-form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* 2×2 grid */
+.donor-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px 20px;
+}
+
+.donor-grid input {
+  height: 48px;
+  font-size: 14px;
+}
+
+/* buttons */
+.donor-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+}
+
+/* mobile */
+@media (max-width: 640px) {
+  .donor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .donor-actions {
+    justify-content: stretch;
+  }
+
+  .donor-actions .btn {
     width: 100%;
   }
 }
 
+/* ==========================================
+   PAGE CENTER — HARD CENTER FIX
+========================================== */
+
+.page-center {
+  min-height: calc(100vh - 120px); /* below navbar */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+}
+/* ==========================================
+   INPUT + BUTTON NORMALIZATION
+   (ALL EXCEPT LIGHT & GOLD)
+========================================== */
+
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) input,
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) select,
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) textarea {
+  background: rgba(255,255,255,0.92);
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #0f172a;
+}
+
+/* placeholders */
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) input::placeholder {
+  color: #6b7280;
+}
+
+/* focus state */
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) input:focus,
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+}
+/* ==========================================
+   BUTTON CONSISTENCY
+   (ALL EXCEPT LIGHT & GOLD)
+========================================== */
+
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) .btn.primary {
+  background: linear-gradient(
+    135deg,
+    var(--accent),
+    color-mix(in srgb, var(--accent) 70%, #000)
+  );
+  color: #ffffff;
+}
+
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) .btn.secondary {
+  background: rgba(255,255,255,0.18);
+  color: #ffffff;
+  border: 1px solid rgba(255,255,255,0.35);
+}
+
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) .btn.danger {
+  background: linear-gradient(135deg, #dc2626, #991b1b);
+  color: #ffffff;
+}
+/* ==========================================
+   INPUT BLENDING — NON LIGHT / GOLD THEMES
+========================================== */
+
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) input,
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) select,
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"]) textarea {
+  background: rgba(255,255,255,0.12);   /* 🔑 blends with theme */
+  border: 1.5px solid rgba(255,255,255,0.35);
+  color: #ffffff;
+
+  backdrop-filter: blur(6px);
+}
+
+/* Placeholder — soft, readable */
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"])
+input::placeholder {
+  color: rgba(255,255,255,0.7);
+}
+
+/* Focus — accent glow */
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"])
+input:focus,
+[data-theme]:not([data-theme="light"]):not([data-theme="gold"])
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-soft);
+  outline: none;
+}
+/* ==========================================
+   THEME SELECTOR — DROPDOWN FIX
+========================================== */
+
+/* Reset select itself */
+.theme-select {
+  background: var(--surface-bg) !important;
+  color: var(--text-main) !important;
+  border: 1px solid var(--surface-border);
+}
+
+/* CRITICAL: fix dropdown list */
+.theme-select option {
+  background: #ffffff !important;   /* native white list */
+  color: #111827 !important;        /* dark readable text */
+}
+
+
+/* ================= ADMIN DASHBOARD SPACING FIX ================= */
+
+/* Move welcome text up */
+.admin-header {
+  margin-top: -24px;      /* 🔼 pulls it upward */
+  margin-bottom: 32px;   /* 🔽 tighter gap before cards */
+}
+
+/* If welcome text is an h1 */
+.admin-header h1 {
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+
+/* ================= ML RISK CARD — STEP 5 ================= */
+
+.ml-risk {
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid var(--accent);
+}
+
+/* Title */
+.ml-title {
+  margin-bottom: 6px;
+}
+
+/* Risk text */
+.ml-risk-level {
+  font-size: 22px;
+  font-weight: 800;
+  margin-top: 4px;
+}
+
+/* Days left */
+.ml-days {
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--text-soft);
+}
+
+/* Warning text */
+.ml-warning {
+  margin-top: 10px;
+  font-weight: 700;
+  color: #ef4444;
+}
+
+/* ================= STATES ================= */
+
+/* SAFE */
+.ml-risk.safe {
+  border-left-color: #22c55e;
+}
+
+/* WARNING */
+.ml-risk.warning {
+  border-left-color: #f59e0b;
+  animation: glowWarning 3s ease-in-out infinite;
+}
+
+/* CRITICAL */
+.ml-risk.critical {
+  border-left-color: #ef4444;
+  animation: pulseCritical 1.8s ease-in-out infinite;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes glowWarning {
+  0%, 100% {
+    box-shadow: 0 0 0 rgba(245,158,11,0);
+  }
+  50% {
+    box-shadow: 0 0 18px rgba(245,158,11,0.45);
+  }
+}
+
+@keyframes pulseCritical {
+  0% {
+    box-shadow: 0 0 0 rgba(239,68,68,0);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 28px rgba(239,68,68,0.55);
+    transform: scale(1.02);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(239,68,68,0);
+    transform: scale(1);
+  }
+}
+
+
+/* ================= ML RISK CARD — GUARANTEED ================= */
+
+.ml-risk {
+  position: relative;
+  overflow: hidden;
+  border-left: 6px solid red;
+}
+
+/* text */
+.ml-risk-level {
+  font-size: 22px;
+  font-weight: 800;
+}
+
+/* ================= STATES ================= */
+
+.ml-risk.safe {
+  border-left-color: #22c55e;
+}
+
+.ml-risk.warning {
+  border-left-color: #f59e0b;
+  animation: glowWarning 2.8s infinite;
+}
+
+.ml-risk.critical {
+  border-left-color: #ef4444;
+  animation: pulseCritical 1.6s infinite;
+}
+
+/* ================= ANIMATIONS ================= */
+
+@keyframes glowWarning {
+  0% { box-shadow: 0 0 0 rgba(245,158,11,0); }
+  50% { box-shadow: 0 0 22px rgba(245,158,11,0.6); }
+  100% { box-shadow: 0 0 0 rgba(245,158,11,0); }
+}
+
+@keyframes pulseCritical {
+  0% {
+    box-shadow: 0 0 0 rgba(239,68,68,0);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 32px rgba(239,68,68,0.7);
+    transform: scale(1.03);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(239,68,68,0);
+    transform: scale(1);
+  }
+}
+
+/* ==========================================
+   NEAREST HOSPITALS BUTTON (THEME SAFE)
+========================================== */
+
+.btn-nearest {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 12px 22px;
+  border-radius: 999px; /* pill shape */
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      color-mix(in srgb, var(--accent) 70%, #000)
+    );
+
+  color: #ffffff;
+  border: none;
+
+  cursor: pointer;
+  text-decoration: none;
+
+  box-shadow:
+    0 10px 26px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+}
+
+/* Hover */
+.btn-nearest:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.05);
+  box-shadow:
+    0 16px 36px rgba(0,0,0,0.45),
+    inset 0 1px 0 rgba(255,255,255,0.3);
+}
+
+/* Active */
+.btn-nearest:active {
+  transform: translateY(0);
+}
+
+/* Safety: never invisible text */
+.btn-nearest * {
+  opacity: 1 !important;
+}

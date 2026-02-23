@@ -1,4 +1,3 @@
-// src/components/Header.jsx
 import React from 'react'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { logout } from '../services/authService'
@@ -11,6 +10,14 @@ export default function Header() {
   const admin = isAdmin()
   const isLoggedIn = !!localStorage.getItem('token')
 
+  // ❌ Hide header completely on auth pages
+  if (
+    location.pathname === '/login' ||
+    location.pathname === '/register'
+  ) {
+    return null
+  }
+
   const isActive = (path) => location.pathname === path
 
   const handleLogout = () => {
@@ -22,32 +29,19 @@ export default function Header() {
     <header className="header">
       {/* BRAND */}
       <div className="brand">
-        <div
-          className="logo"
-          style={{
-            fontSize: 22,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}
-        >
-          🩸
-        </div>
-
+        <div className="logo">🩸</div>
         <div style={{ fontWeight: 700, fontSize: 18 }}>
           DonateLife
         </div>
       </div>
 
-      {/* NAVIGATION */}
+      {/* NAV */}
       {isLoggedIn && (
         <nav className="nav">
-          {/* COMMON HOME */}
           <Link to="/" className={isActive('/') ? 'active' : ''}>
             Home
           </Link>
 
-          {/* DASHBOARD (ROLE BASED) */}
           <Link
             to="/dashboard"
             className={isActive('/dashboard') ? 'active' : ''}
@@ -55,9 +49,15 @@ export default function Header() {
             Dashboard
           </Link>
 
-          {/* COMMON FEATURES */}
           <Link to="/donors" className={isActive('/donors') ? 'active' : ''}>
             Donors
+          </Link>
+
+          <Link
+            to="/hospitals"
+            className={isActive('/hospitals') ? 'active' : ''}
+          >
+            Hospitals
           </Link>
 
           <Link
@@ -74,7 +74,6 @@ export default function Header() {
             Requests
           </Link>
 
-          {/* ADMIN ONLY */}
           {admin && (
             <>
               <Link
@@ -95,20 +94,11 @@ export default function Header() {
         </nav>
       )}
 
-      {/* RIGHT ACTIONS */}
+      {/* RIGHT */}
       <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-        <ThemeSwitcher />
+        {isLoggedIn && <ThemeSwitcher />}
 
-        {!isLoggedIn ? (
-          <>
-            <Link to="/register" className="btn btn-secondary">
-              Join Free
-            </Link>
-            <Link to="/login" className="btn">
-              Login
-            </Link>
-          </>
-        ) : (
+        {isLoggedIn && (
           <button onClick={handleLogout} className="btn">
             Logout
           </button>

@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface NearbyHospitalRepository extends JpaRepository<NearbyHospital, Long> {
-    List<NearbyHospital> findByCity(String city);
+
+    List<NearbyHospital> findByCityIgnoreCase(String city);
 }

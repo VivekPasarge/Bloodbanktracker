@@ -1,150 +1,141 @@
-import React, { useEffect, useState } from 'react'
-import CircleStat from '../components/CircleStat'
-import { getInventory } from '../services/inventoryService'
-import { getDonors } from '../services/donorService'
+// src/pages/Home.jsx
 
-import LiveMap from "../components/LiveMap"
-import { centers } from "../data/centers"
+import React, { useEffect, useState } from "react";
+import CircleStat from "../components/CircleStat";
+import { getInventory } from "../services/inventoryService";
+import { getDonors } from "../services/donorService";
+import { getMlPrediction } from "../services/mlService";
+import LiveMap from "../components/LiveMap";
+import { centers } from "../data/centers";
+import "./Home.css";
 
-export default function Dashboard() {
-  const [inventory, setInventory] = useState([])
-  const [donors, setDonors] = useState([])
+export default function Home() {
+  const [inventory, setInventory] = useState([]);
+  const [donors, setDonors] = useState([]);
+  const [mlResult, setMlResult] = useState(null);
 
+  /* LOAD DATA */
   useEffect(() => {
     async function load() {
       try {
-        const r = await getInventory()
-        setInventory(r.data || r)
-      } catch (e) {
-        console.error(e)
-      }
+        const inv = await getInventory();
+        setInventory(inv?.data ?? []);
+      } catch {}
 
       try {
-        const d = await getDonors()
-        setDonors(d.data || d)
-      } catch (e) {
-        console.error(e)
-      }
+        const d = await getDonors();
+        setDonors(d?.data ?? []);
+      } catch {}
     }
-    load()
-  }, [])
+    load();
+  }, []);
 
-  const bloods = [
-  { label: 'A+', percent: 60 },
-  { label: 'O+', percent: 55 },
-  { label: 'AB+', percent: 15, critical: true },
-  { label: 'A-', percent: 60 },
-  { label: 'B+', percent: 40 },
-  { label: 'B-', percent: 10 },     // ✅ ADDED
-  { label: 'AB-', percent: 40 },
-  { label: 'O-', percent: 20 },
-]
+  /* ML LOGIC */
+  useEffect(() => {
+    if (!inventory.length) return;
+
+    const total = inventory.reduce((s, i) => s + Number(i.units || 0), 0);
+    const avg = Math.max(1, Math.ceil(total / 30));
+
+    getMlPrediction(total, avg)
+      .then(res => setMlResult(res.data))
+      .catch(() =>
+        setMlResult({
+          risk: "SAFE",
+          predictedDaysLeft: Math.max(1, Math.floor(total / avg))
+        })
+      );
+  }, [inventory]);
+
+  /* INVENTORY STATS */
+  const bloodGroups = ["A+","O+","AB+","A-","B+","B-","AB-","O-"];
+  const stats = bloodGroups.map(bg => {
+    const rec = inventory.find(i => i.bloodType === bg);
+    const units = rec?.units ?? 0;
+    return {
+      label: bg,
+      percent: Math.min(100, Math.round((units / 100) * 100)),
+      critical: units <= 20
+    };
+  });
 
   return (
-    <div>
+    <div className="home-page">
 
-      {/* ================= TOP GRID ================= */}
-      <div className="top-grid">
+      {/* HERO */}
+      <section className="home-hero">
+        <h1 className="hero-title-main">Blood Inventory Overview</h1>
 
-        {/* ===== LEFT COLUMN ===== */}
-        <div className="left-stack">
+        <p className="hero-subtitle">
+          Live monitoring of blood availability, donation activity,
+          and predictive supply risk across centers.
+        </p>
 
-          {/* HERO / MISSION CARD */}
-          <div className="panel hero-panel">
-            <h2 className="hero-title">
-  Saving Lives Starts With Availability
-</h2>
-
-
-            <p className="hero-tagline">
-  Every unit of blood is a second chance at life.
-  Monitor inventory in real time, respond faster in emergencies,
-  and ensure no request goes unanswered.
-</p>
-
-
-            <div style={{
-              marginTop: 16,
-              display: 'flex',
-              gap: 32
-            }}>
-              <div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--accent)' }}>
-                  {donors.length}
-                </div>
-                <div className="footer-muted">Active Donors</div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--accent)' }}>
-                  {inventory.length}
-                </div>
-                <div className="footer-muted">Blood Records</div>
-              </div>
-
-              <div>
-                <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--accent)' }}>
-                  {centers.length}
-                </div>
-                <div className="footer-muted">Donation Centers</div>
-              </div>
-            </div>
+        <div className="hero-cards">
+          <div className="hero-card">
+            <strong>{donors.length}</strong>
+            <span>Active Donors</span>
           </div>
 
-          {/* BLOOD INVENTORY LEVELS */}
-          <div className="panel">
-            <h2 style={{ margin: 0, marginBottom: 12 }}>
-              BLOOD INVENTORY LEVELS
-            </h2>
-
-            <div className="stats">
-              {bloods.map(b => (
-                <CircleStat key={b.label} {...b} />
-              ))}
-            </div>
+          <div className="hero-card">
+            <strong>{inventory.length}</strong>
+            <span>Blood Records</span>
           </div>
 
+          <div className="hero-card">
+            <strong>{centers.length}</strong>
+            <span>Donation Centers</span>
+          </div>
+        </div>
+      </section>
+
+      {/* INVENTORY — 🔴 FIX IS HERE */}
+      <section className="section-box inventory-section">
+        <h2>Blood Inventory Levels</h2>
+
+        <div className="inventory-grid">
+          {stats.map(b => (
+            <CircleStat key={b.label} {...b} />
+          ))}
+        </div>
+      </section>
+
+      {/* STATUS */}
+      <section className="status-grid">
+        <div className={`section-box ml-risk ${mlResult?.risk?.toLowerCase()}`}>
+          <h2>ML Stock Risk</h2>
+
+          {mlResult && (
+            <>
+              <div className="risk">{mlResult.risk}</div>
+              <p className="muted">
+                Estimated days remaining: <b>{mlResult.predictedDaysLeft}</b>
+              </p>
+            </>
+          )}
         </div>
 
-        {/* ===== RIGHT COLUMN ===== */}
-        <aside className="right-stack">
-
-          <div className="card-small">
-            <h3 style={{ margin: 0 }}>RECENT DONATIONS</h3>
-            <div style={{ marginTop: 8 }}>
-              {donors && donors.length ? donors.slice(0, 4).map(d => (
-                <div
-                  key={d.id || d.email}
-                  style={{
-                    padding: 8,
-                    borderTop: '1px solid rgba(255,255,255,0.12)'
-                  }}
-                >
-                  {d.name || d.fullName} — {d.bloodType || d.type}
-                </div>
-              )) : (
-                <div className="footer-muted">No donations</div>
-              )}
+        <div className="section-box">
+          <h2>Recent Donations</h2>
+          {donors.slice(0, 4).map(d => (
+            <div key={d.id || d.email} className="row-divider">
+              {d.name || d.fullName} — {d.bloodType}
             </div>
-          </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="card-small">
-            <h3 style={{ margin: 0 }}>NEARBY DONATION CENTERS</h3>
-            <div style={{ height: 200, marginTop: 8 }}>
-              <LiveMap centers={centers} />
-            </div>
-          </div>
+      {/* MAP */}
+      <section className="section-box">
+        <h2>Nearby Donation Centers</h2>
+        <div className="map-wrap">
+          <LiveMap centers={centers} />
+        </div>
+      </section>
 
-          
-        </aside>
-      </div>
-
-      {/* ================= BOTTOM TABLE ================= */}
-      <div style={{ marginTop: 16 }} className="panel">
-        <h3 style={{ margin: 0, marginBottom: 8 }}>
-          UPCOMING BLOOD DRIVES
-        </h3>
-
+      {/* EVENTS */}
+      <section className="section-box">
+        <h2>Upcoming Blood Drives</h2>
         <table className="table">
           <thead>
             <tr>
@@ -157,14 +148,18 @@ export default function Dashboard() {
           <tbody>
             <tr>
               <td>1</td>
-              <td>City General Hospital</td>
-              <td>Hall A</td>
-              <td>2025-12-05</td>
+              <td>City Blood Donation Camp</td>
+              <td>Community Hall</td>
+              <td>
+                {new Date(Date.now() + 7 * 86400000)
+                  .toISOString()
+                  .slice(0, 10)}
+              </td>
             </tr>
           </tbody>
         </table>
-      </div>
+      </section>
 
     </div>
-  )
+  );
 }

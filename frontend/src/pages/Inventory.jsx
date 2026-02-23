@@ -1,41 +1,64 @@
-// src/pages/Inventory.jsx
-import React, {useEffect, useState} from 'react';
-import { getInventory, deleteInventory } from '../services/inventoryService';
-import { isAdmin } from '../services/authUtils'
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { getInventory, deleteInventory } from "../services/inventoryService";
+import { isAdmin } from "../services/authUtils";
 
-export default function Inventory(){
+export default function Inventory() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const admin = isAdmin()
 
-  useEffect(()=> {
-    (async () => {
+  const admin = isAdmin();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    async function loadInventory() {
       try {
         const res = await getInventory();
         const data = res?.data ?? res;
         setItems(Array.isArray(data) ? data : []);
-      } catch (e) { console.error(e) }
-      setLoading(false);
-    })();
+      } catch (err) {
+        console.error("Failed to load inventory", err);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    loadInventory();
   }, []);
 
-  async function handleDelete(id){
-    if(!confirm('Delete inventory item?')) return;
+  async function handleDelete(id) {
+    if (!window.confirm("Delete inventory item?")) return;
+
     try {
       await deleteInventory(id);
-      setItems(prev => prev.filter(x => (x.id ?? x.blood_type) !== id));
-    } catch(err){
-      console.error(err); alert('Delete failed');
+      setItems(prev => prev.filter(item => item.id !== id));
+    } catch (err) {
+      console.error("Delete failed", err);
+      alert("Delete failed");
     }
   }
 
   return (
     <div>
-      <h1 className="colorful-title">Inventory</h1>
+      {/* ===== PAGE HEADER ===== */}
+      <div className="page-header">
+        <button
+          className="btn secondary"
+          onClick={() => navigate("/dashboard")}
+        >
+          ← Back to Dashboard
+        </button>
 
-      {loading ? <div className="footer-muted">Loading...</div> : null}
+        <h1 className="page-title">Inventory</h1>
 
-      <div style={{marginTop:12}} className="panel">
+        {/* keeps layout aligned */}
+        <div className="actions" />
+      </div>
+
+      {/* ===== CONTENT ===== */}
+      <div className="panel">
+        {loading && <div className="footer-muted">Loading...</div>}
+
         <table className="table">
           <thead>
             <tr>
@@ -45,24 +68,41 @@ export default function Inventory(){
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody>
-            {items.map(i => (
-              <tr key={i.id ?? i.blood_type}>
-                <td>{i.id ?? '-'}</td>
-                <td>{i.blood_type ?? i.bloodType ?? i.type}</td>
-                <td>{i.units ?? i.quantity ?? '-'}</td>
-                <td>
-                  <button className="btn" onClick={()=>alert(JSON.stringify(i,null,2))}>View</button>
-                  {admin && (
-  <button
-    className="btn"
-    style={{ marginLeft: 8, background: '#b91c1c' }}
-    onClick={() => handleDelete(i.id ?? i.blood_type)}
-  >
-    Delete
-  </button>
-)}
 
+          <tbody>
+            {!loading && items.length === 0 && (
+              <tr>
+                <td colSpan="4" style={{ textAlign: "center", opacity: 0.6 }}>
+                  No inventory data
+                </td>
+              </tr>
+            )}
+
+            {items.map(item => (
+              <tr key={item.id}>
+                <td>{item.id}</td>
+                <td>{item.bloodType}</td>
+                <td>{item.units}</td>
+                <td>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button
+                      className="btn secondary"
+                      onClick={() =>
+                        alert(JSON.stringify(item, null, 2))
+                      }
+                    >
+                      View
+                    </button>
+
+                    {admin && (
+                      <button
+                        className="btn danger"
+                        onClick={() => handleDelete(item.id)}
+                      >
+                        Delete
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
